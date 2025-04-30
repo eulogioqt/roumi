@@ -54,6 +54,7 @@ class SessionManager:
                 to_close.append(faceprint_id)
         
         for faceprint_id in to_close:
+            print(f"Cerrando la sesión de {faceprint_id}")
             self._close_session(faceprint_id)
     
     def _close_session(self, faceprint_id: int):

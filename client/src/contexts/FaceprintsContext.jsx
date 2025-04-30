@@ -62,6 +62,8 @@ export const FaceprintsProvider = ({ children }) => {
 
                 deleteFaceprint(e.id);
                 showToast("Persona eliminada", "Se ha eliminado a la persona " + name, "green");
+            } else {
+                console.log("ERROR: Evento desconocido de faceprint:", e);
             }
         };
 

@@ -23,6 +23,17 @@ const FaceprintDetailPage = () => {
 
     const navigate = useNavigate();
 
+    const fetchSessionData = async (id) => {
+        setSessionList(undefined);
+
+        const sessionResponse = await sessions.getAll(`?faceprint_id=${id}`);
+        if (isResponseOk(sessionResponse)) {
+            setSessionList(sessionResponse.data);
+        } else {
+            showToast("Error al obtener sesiones", sessionResponse.data.detail, "red");
+        }
+    }
+
     useEffect(() => {
         const getActualFaceprint = async () => {
             let faceprint = getFaceprint(id);
@@ -38,12 +49,7 @@ const FaceprintDetailPage = () => {
             setFaceprint(faceprint);
             setNewName(faceprint.name);
 
-            const sessionResponse = await sessions.getAll(`?faceprint_id=${faceprint.id}`);
-            if (isResponseOk(sessionResponse)) {
-                setSessionList(sessionResponse.data);
-            } else {
-                showToast("Error al obtener sesiones", sessionResponse.data.detail, "red");
-            }
+            await fetchSessionData(faceprint.id);
         };
 
         getActualFaceprint();
@@ -177,15 +183,22 @@ const FaceprintDetailPage = () => {
                 </div>
 
                 <div className="mt-5">
-                    <h4 className="mb-3">Actividad</h4>
+                    <div className="d-flex justify-content-between align-items-center mb-3">
+                        <h4 className="mb-0">Actividad</h4>
+                        <button className="btn btn-outline-secondary" onClick={() => fetchSessionData(faceprint.id)}>
+                            <i className="bi bi-arrow-clockwise me-2" /> Recargar
+                        </button>
+                    </div>
 
-                    {!sessionList ? (
-                        <div className="text-center py-5">
-                            <div className="spinner-border text-primary" role="status" />
-                        </div>
-                    ) : (
-                        <SessionList faceprint={faceprint} sessions={sessionList} />
-                    )}
+                    <div className="mb-5">
+                        {!sessionList ? (
+                            <div className="text-center py-5">
+                                <div className="spinner-border text-primary" role="status" />
+                            </div>
+                        ) : (
+                            <SessionList faceprint={faceprint} sessions={sessionList} />
+                        )}
+                    </div>
                 </div>
             </div>
         </>

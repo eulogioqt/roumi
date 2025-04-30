@@ -5,6 +5,7 @@ import HomePage from "./pages/home/HomePage";
 import FaceprintListPage from "./pages/faceprints/FaceprintListPage";
 import FaceprintDetailPage from "./pages/faceprints/FaceprintDetailPage";
 
+import WebSocketVideoViewer from "./components/WebSocketVideoViewer";
 import LoadingScreen from "./components/LoadingScreen";
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
 
     return (
         <Router>
+            <WebSocketVideoViewer />
             <LoadingScreen />
 
             <Routes>

@@ -31,13 +31,15 @@ const FaceprintListPage = () => {
                     </div>
                 </div>
 
-                {loadingFaceprints ? (
-                    <div className="text-center py-5">
-                        <div className="spinner-border text-primary" role="status" />
-                    </div>
-                ) : (
-                    <FaceprintList faceprints={faceprintsData} />
-                )}
+                <div className="mb-5">
+                    {loadingFaceprints ? (
+                        <div className="text-center py-5">
+                            <div className="spinner-border text-primary" role="status" />
+                        </div>
+                    ) : (
+                        <FaceprintList faceprints={faceprintsData} />
+                    )}
+                </div>
             </div>
         </>
     );

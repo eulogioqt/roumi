@@ -2,6 +2,18 @@ import React from "react";
 import SimpleModal from "../../../components/SimpleModal";
 import ScoresChart from "./ScoresChart";
 
+const formatDuration = (start, end) => {
+    const seconds = (end - start).toFixed(0);
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+
+    if (hours > 0) return `${hours}h ${remainingMinutes}min ${remainingSeconds}s`;
+    if (minutes > 0) return `${minutes}min ${remainingSeconds}s`;
+    return `${seconds}s`;
+};
+
 const SessionModal = ({ session, handleClose, isOpen }) => {
     if (!session) return null;
 
@@ -69,7 +81,7 @@ const SessionModal = ({ session, handleClose, isOpen }) => {
                             <strong>ID de sesión:</strong> {session.id}
                         </div>
                         <div className="col-6 mb-2">
-                            <strong>Duración:</strong> {duration} segundos
+                            <strong>Duración:</strong> {formatDuration(session.start_time, session.end_time)} segundos
                         </div>
                         <div className="col-6 mb-2">
                             <strong>Detecciones:</strong> {numDetections}
@@ -83,13 +95,24 @@ const SessionModal = ({ session, handleClose, isOpen }) => {
                 {renderStatsCard("Estadísticas de detección", detectionStats)}
                 {renderStatsCard("Estadísticas de clasificación", classificationStats)}
 
-                <div className="card p-3 shadow-sm" style={{ backgroundColor: "#f8f9fa", height: "320px" }}>
-                    <h5 className="mb-3 text-primary fw-bold">Gráfico de evolución</h5>
+                <div className="card p-3 shadow-sm mb-4" style={{ backgroundColor: "#f8f9fa", height: "320px" }}>
+                    <h5 className="mb-3 text-primary fw-bold">Gráfico puntuación de detección</h5>
                     <div style={{ height: "100%" }}>
                         <ScoresChart
                             times={times}
-                            detectionScores={detectionScores}
-                            classificationScores={classificationScores}
+                            scores={detectionScores}
+                            label="Detección"
+                        />
+                    </div>
+                </div>
+
+                <div className="card p-3 shadow-sm" style={{ backgroundColor: "#f8f9fa", height: "320px" }}>
+                    <h5 className="mb-3 text-primary fw-bold">Gráfico puntuación de clasificación</h5>
+                    <div style={{ height: "100%" }}>
+                        <ScoresChart
+                            times={times}
+                            scores={classificationScores}
+                            label="Clasificación"
                         />
                     </div>
                 </div>

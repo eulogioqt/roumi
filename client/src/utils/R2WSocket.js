@@ -13,19 +13,22 @@ export default class R2WSocket {
 
         this.socket.onmessage = (event) => {
             let r2w_message;
+
             try {
                 r2w_message = JSON.parse(event.data);
             } catch (e) {
                 console.log("ERROR ON JSON PARSE ON R2WSocket", e);
                 console.log("ORIGINAL MESSAGE", event.data);
-            }            
-            
+            }
+
             if (r2w_message.type === R2W_MESSAGE_TYPE.MESSAGE) {
                 const message = JSON.parse(r2w_message.data); // Ver si cambiar esto para que ya venga parseado del nodo ros
                 if (this.onmessage) this.onmessage(message);
-            } else if  (r2w_message.type === R2W_MESSAGE_TYPE.TOPIC) {
+            } else if (r2w_message.type === R2W_MESSAGE_TYPE.TOPIC) {
                 const message = r2w_message.data;
                 if (this.ontopic) this.ontopic(message);
+            } else {
+                console.log("ERROR: MESSAGE NOT IDENTIFIED: ", r2w_message)
             }
         };
 
