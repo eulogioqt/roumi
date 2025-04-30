@@ -1,3 +1,5 @@
+import os
+
 from glob import glob
 from setuptools import find_packages, setup
 
@@ -11,7 +13,7 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        ('share/' + package_name + "/commands", glob(package_name + '/commands/*.json'))
+        (os.path.join('share', package_name), glob('launch/*launch.[pxy][yma]*')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -23,6 +25,7 @@ setup(
     entry_points={
         'console_scripts': [
             'roumi_web = roumi_web.roumi_web_node:main',
+            'session_manager = roumi_web.session_manager_node:main',
             'api_rest = roumi_web.api_rest_node:main'
         ],
     },

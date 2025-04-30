@@ -10,6 +10,7 @@ from .client_node import ClientNode
 from .faceprint_api import FaceprintAPI
 from .session_api import SessionAPI
 
+
 def main(args=None):
     rclpy.init(args=args)
 

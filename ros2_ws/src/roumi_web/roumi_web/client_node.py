@@ -1,32 +1,21 @@
 import rclpy
 
-from rclpy.node import Node
-
 from hri_msgs.srv import Detection, Recognition, Training, GetString
-
 from hri_vision.hri_bridge import HRIBridge
 
+from .client_session_node import ClientSessionNode
 
-class ClientNode(Node):
+
+class ClientNode(ClientSessionNode):
     def __init__(self):
-        super().__init__('api_client_node')
+        super().__init__()
 
         self.get_faceprint_client = self.create_client_wait(GetString, 'recognition/get_faceprint')
         self.detection_client = self.create_client_wait(Detection, 'detection')
         self.recognition_client = self.create_client_wait(Recognition, 'recognition')
         self.training_client = self.create_client_wait(Training, 'recognition/training')
 
-        self.get_sessions_client = self.create_client_wait(GetString, 'logic/get/sessions')
-
         self.br = HRIBridge()
-        self.get_logger().info("ROS Client Node initializated succesfully")
-
-    def create_client_wait(self, srv_type, srv_name):
-        client = self.create_client(srv_type, srv_name)
-        while not client.wait_for_service(timeout_sec=1.0):
-            self.get_logger().info(f'{srv_name} service not available, waiting again...')
-
-        return client
 
     def get_faceprint_request(self, args_msg=""):
         get_faceprint_request = GetString.Request()
@@ -73,13 +62,3 @@ class ClientNode(Node):
         result_training = future_training.result()
 
         return result_training.result, result_training.message.data
-    
-    def get_sessions_request(self, args_msg=""):
-        get_sessions_request = GetString.Request()
-        get_sessions_request.args = args_msg
-
-        future_get_sessions = self.get_sessions_client.call_async(get_sessions_request)
-        rclpy.spin_until_future_complete(self, future_get_sessions)
-        result_get_sessions = future_get_sessions.result()
-
-        return result_get_sessions.text
