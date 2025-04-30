@@ -24,8 +24,10 @@ class SessionManagerNode(Node):
         self.get_sessions_serv = self.create_service(GetString, 'roumi/sessions/get', self.get_sessions_service)
 
         self.get_logger().info("Session Manager Node initializated succesfully")
+        self.create_timer(10.0, self.sessions.check_timeouts)
 
     def session_callback(self, msg):
+        self.get_logger().info(f"Nuevo procesamiento: ({str(msg.faceprint_id)}, {str(msg.detection_score)}, {str(msg.classification_score)})")
         self.sessions.process_detection(str(msg.faceprint_id), float(msg.detection_score), float(msg.classification_score))
 
     def get_sessions_service(self, request, response):

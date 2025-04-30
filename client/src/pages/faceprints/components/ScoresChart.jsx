@@ -21,7 +21,7 @@ const downsample = (arr, maxPoints) => {
 };
 
 const ScoresChart = ({ times, detectionScores, classificationScores }) => {
-    const maxPoints = 999999;//500;
+    const maxPoints = 500;
 
     const sampledTimes = downsample(times, maxPoints).map(t => parseFloat(t.toFixed(1)));
     const sampledDetectionScores = downsample(detectionScores, maxPoints);

@@ -24,7 +24,6 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'roumi_web = roumi_web.roumi_web_node:main',
             'session_manager = roumi_web.session_manager_node:main',
             'api_rest = roumi_web.api_rest_node:main'
         ],

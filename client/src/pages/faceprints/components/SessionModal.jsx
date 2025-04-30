@@ -55,6 +55,7 @@ const SessionModal = ({ session, handleClose, isOpen }) => {
     return (
         <SimpleModal
             name="session-info"
+            size="xl"
             title="Información sobre la sesión"
             handleClose={handleClose}
             isOpen={isOpen}
