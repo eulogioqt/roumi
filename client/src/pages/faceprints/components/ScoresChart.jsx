@@ -14,7 +14,7 @@ import {
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Filler);
 
 const formatDuration = (start, end) => {
-    const seconds = (end - start).toFixed(0);
+    const seconds = (end - start).toFixed(1);
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     const hours = Math.floor(minutes / 60);

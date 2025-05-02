@@ -80,7 +80,7 @@ class WebSocketServer:
 
     async def _websocket_server(self):
         try:
-            async with websockets.serve(self._handler, "localhost", self.port):
+            async with websockets.serve(self._handler, "0.0.0.0", self.port):
                 print(f"WebSocket running on https://localhost:{self.port}")
                 await self.stop_event.wait()
         finally:

@@ -22,6 +22,6 @@ def main(args=None):
     session_api = SessionAPI(node=client_node)
     set_session_api(session_api)
 
-    uvicorn.run(app, host="localhost", port=7654)
+    uvicorn.run(app, host="0.0.0.0", port=7654)
 
     rclpy.shutdown()

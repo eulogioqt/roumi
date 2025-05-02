@@ -1,9 +1,9 @@
 import json
 import rclpy
-from rclpy.node import Node
 
 from queue import Queue
 
+from .http_server import HTTPServer
 from .websocket_thread_mixer import WebSocketThreadMixer
 from .websocket_server import WebSocketServer
 from .stoppable_node import StoppableNode
@@ -41,7 +41,7 @@ class Server(StoppableNode):
 
         self.node = ServerNode()
         self.ws = WebSocketServer(self.on_message, self.on_user_connect, self.on_user_disconnect)
-        #add http server here and add to the ws th mixer
+        self.http_server = HTTPServer(port=8173)
 
     def spin(self):
         if self.node.ros_queue.qsize() > 0: # ROS messages
@@ -87,5 +87,5 @@ def main(args=None):
     rclpy.init(args=args)
 
     server = Server()
-    websocket_thread_mixer = WebSocketThreadMixer(server.ws, server)
+    websocket_thread_mixer = WebSocketThreadMixer(server.ws, server, server.http_server)
     websocket_thread_mixer.run()

@@ -3,7 +3,8 @@ import axios from "axios";
 
 const APIContext = createContext();
 
-const BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:7654";
+const serverIP = window.location.hostname;
+const BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://" + serverIP + ":7654";
 console.log("BASE_URL:", BASE_URL);
 
 export const APIProvider = ({ children }) => {
@@ -46,7 +47,7 @@ export const APIProvider = ({ children }) => {
         delete: (url, headers = undefined) => requestHandler("delete", url, undefined, headers),
     };
 
-    const isResponseOk = (response) => response.status >= 200 && response.status < 300;
+    const isResponseOk = (response) => response && response.status >= 200 && response.status < 300;
 
     const createEndpointMethods = (entity, extraEndpoints) => ({
         getAll: (params = "", version = "v1") =>
