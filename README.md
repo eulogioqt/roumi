@@ -94,11 +94,12 @@ Your code may call ROS 2 services, internal REST endpoints or any database —
 {
   "type": "FACEPRINT_EVENT",
   "data": { 
-    "event": "CREATE" | "UPDATE" | "DELETE", 
+    "event": "CREATE", 
     "id": 42 
   }
 }
 ```
+Note: Event type can be `CREATE`, `UPDATE` or `DELETE`.
 
 Publish JSON to /ros2web/ros; the Web UI refreshes automatically.
 
