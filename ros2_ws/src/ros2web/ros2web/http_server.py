@@ -24,8 +24,13 @@ class HTTPServer:
 
         current = os.path.abspath(__file__)
         candidates = [
+            os.path.join(current, '../../../../../../../../client/dist'),
+            os.path.join(current, '../../../../../../../client/dist'),
+            os.path.join(current, '../../../../../../client/dist'),
             os.path.join(current, '../../../../../client/dist'),
+            os.path.join(current, '../../../../client/dist'),
             os.path.join(current, '../../../client/dist'),
+            os.path.join(current, '../../client/dist'),
             os.path.join(os.path.dirname(current), '../../client/dist'),
         ]
         for c in candidates:
