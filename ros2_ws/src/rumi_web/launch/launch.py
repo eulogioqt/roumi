@@ -46,14 +46,14 @@ def generate_launch_description():
             emulate_tty=True,
         ),
         Node(
-            package='roumi_web',
+            package='rumi_web',
             executable='api_rest',
             name='api_rest',
             output='screen',
             emulate_tty=True,
         ),
         Node(
-            package='roumi_web',
+            package='rumi_web',
             executable='session_manager',
             name='session_manager',
             output='screen'

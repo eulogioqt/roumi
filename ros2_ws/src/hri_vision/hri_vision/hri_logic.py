@@ -7,7 +7,7 @@ from rclpy.node import Node
 from sensor_msgs.msg import Image
 from std_msgs.msg import String
 from hri_msgs.srv import Detection, Recognition, Training
-from roumi_msgs.msg import SessionMessage
+from rumi_msgs.msg import SessionMessage
 
 from .hri_bridge import HRIBridge
 from .api.gui import get_name, ask_if_name, mark_face
@@ -25,7 +25,7 @@ class HRILogicNode(Node):
 
         self.subscription_camera = self.create_subscription(Image, 'camera/color/image_raw', self.frame_callback, 1)
 
-        self.publisher_session = self.create_publisher(SessionMessage, 'roumi/sessions/process', 10)
+        self.publisher_session = self.create_publisher(SessionMessage, 'rumi/sessions/process', 10)
         self.publisher_recognition = self.create_publisher(Image, 'camera/color/recognition', 1)
 
         self.detection_client = self.create_client(Detection, 'detection')

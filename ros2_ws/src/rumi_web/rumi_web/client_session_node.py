@@ -2,14 +2,14 @@ import rclpy
 
 from rclpy.node import Node
 
-from roumi_msgs.srv import GetString
+from rumi_msgs.srv import GetString
 
 
 class ClientSessionNode(Node):
     def __init__(self):
         super().__init__('api_client_node')
 
-        self.get_sessions_client = self.create_client_wait(GetString, 'roumi/sessions/get')
+        self.get_sessions_client = self.create_client_wait(GetString, 'rumi/sessions/get')
 
         self.get_logger().info("ROS Client Node initializated succesfully")
 

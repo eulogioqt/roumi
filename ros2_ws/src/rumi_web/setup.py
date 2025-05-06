@@ -3,7 +3,7 @@ import os
 from glob import glob
 from setuptools import find_packages, setup
 
-package_name = 'roumi_web'
+package_name = 'rumi_web'
 
 setup(
     name=package_name,
@@ -24,8 +24,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'session_manager = roumi_web.session_manager_node:main',
-            'api_rest = roumi_web.api_rest_node:main'
+            'session_manager = rumi_web.session_manager_node:main',
+            'api_rest = rumi_web.api_rest_node:main'
         ],
     },
 )

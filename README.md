@@ -1,7 +1,7 @@
 <div align="center">
 
-# RoUMI  
-**Ro**s **U**ser **M**anagement **I**nterface  
+# RUMI  
+**R**OS **U**ser **M**anagement **I**nterface  
 Light‑weight web tool for monitoring and editing face‑recognition data in HRI systems
 
 </div>
@@ -9,7 +9,7 @@ Light‑weight web tool for monitoring and editing face‑recognition data in HR
 ---
 
 ## 1 · Overview  
-RoUMI lets an operator **see, edit and analyse** the identities managed by a face‑recognition
+RUMI lets an operator **see, edit and analyse** the identities managed by a face‑recognition
 pipeline **without stopping the robot**.  
 Everything runs on **ROS 2**, **FastAPI** and **React**; only one topic and one service are mandatory.
 
@@ -22,11 +22,11 @@ Everything runs on **ROS 2**, **FastAPI** and **React**; only one topic and on
 
 ## 2 · Quick start  
 ```
-git clone https://github.com/eulogioqt/roumi.git
-cd roumi/ros2_ws
+git clone https://github.com/eulogioqt/rumi.git
+cd rumi/ros2_ws
 colcon build
 source install/setup.bash
-ros2 launch roumi_web launch.py
+ros2 launch rumi_web launch.py
 ```
 
 If the browser does not open automatically:
@@ -44,7 +44,7 @@ If the browser does not open automatically:
 ## 3 · Connecting your detector  
 
 ### 3.1 Topic to publish  
-`/roumi/sessions/process` - `roumi_msgs/msg/SessionMessage`  
+`/rumi/sessions/process` - `rumi_msgs/msg/SessionMessage`  
 
 ```
 uint32  faceprint_id
@@ -56,13 +56,13 @@ float64 classification_score
 
 | Service | Type | Fields |
 |---------|------|--------|
-| /roumi/sessions/set_params | roumi_msgs/srv/SetSessionParams | timeout_seconds, time_between_detections |
+| /rumi/sessions/set_params | rumi_msgs/srv/SetSessionParams | timeout_seconds, time_between_detections |
 
 ---
 
 ## 4 · Faceprint Interface – plug in your DB  
 
-Edit **`roumi_web/faceprint_api.py`** and implement five methods:
+Edit **`rumi_web/faceprint_api.py`** and implement five methods:
 
 ```
 get_all_faceprints()             → JSONResponse / HTTPException
@@ -73,7 +73,7 @@ delete_faceprint(id)             → …
 ```
 
 Return `JSONResponse` on success or `HTTPException` on error.  
-Your code may call ROS 2 services, internal REST endpoints or any database — RoUMI only verifies the interface.
+Your code may call ROS 2 services, internal REST endpoints or any database — RUMI only verifies the interface.
 
 ---
 
@@ -111,11 +111,11 @@ Key hooks:
 
 | Interface | Purpose |
 |-----------|---------|
-| /roumi/sessions/process (msg) | feed detections |
-| /roumi/sessions/get     (srv) | query sessions |
-| /roumi/sessions/set_params   (srv) | adjust timeout_seconds / time_between_detections |
+| /rumi/sessions/process (msg) | feed detections |
+| /rumi/sessions/get     (srv) | query sessions |
+| /rumi/sessions/set_params   (srv) | adjust timeout_seconds / time_between_detections |
 
-Sessions are stored in `roumi_web/database/system.db` (SQLite).  
+Sessions are stored in `rumi_web/database/system.db` (SQLite).  
 Grouping and statistics are fully automatic.
 
 ---

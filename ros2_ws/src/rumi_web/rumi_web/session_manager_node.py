@@ -4,8 +4,8 @@ import json
 import rclpy
 from rclpy.node import Node
 
-from roumi_msgs.msg import SessionMessage
-from roumi_msgs.srv import GetString, SetSessionParams
+from rumi_msgs.msg import SessionMessage
+from rumi_msgs.srv import GetString, SetSessionParams
 
 from .database.system_database import SystemDatabase
 from .database.session_manager import SessionManager
@@ -19,10 +19,10 @@ class SessionManagerNode(Node):
         self.db = SystemDatabase(self.db_path)
         self.sessions = SessionManager(self.db, timeout_seconds=15.0, time_between_detections=0.0)
 
-        self.session_sub = self.create_subscription(SessionMessage, 'roumi/sessions/process', self.session_callback, 10)
+        self.session_sub = self.create_subscription(SessionMessage, 'rumi/sessions/process', self.session_callback, 10)
 
-        self.get_sessions_serv = self.create_service(GetString, 'roumi/sessions/get', self.get_sessions_service)
-        self.set_params_serv = self.create_service(SetSessionParams, 'roumi/sessions/set_params', self.set_session_params_service)
+        self.get_sessions_serv = self.create_service(GetString, 'rumi/sessions/get', self.get_sessions_service)
+        self.set_params_serv = self.create_service(SetSessionParams, 'rumi/sessions/set_params', self.set_session_params_service)
 
         self.get_logger().info("Session Manager Node initializated succesfully")
         self.create_timer(10.0, self.sessions.check_timeouts)
