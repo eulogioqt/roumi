@@ -141,3 +141,39 @@ npm run build
 | Web frontend | 8173 |
 
 ---
+
+## 9 · Use case demos (videos)
+
+We have recorded **three demo videos** demonstrating the main use cases of RUMI in realistic conditions.  
+The interface was run on a standard computer for recording purposes, but the system is fully compatible with any robot like **Sancho**, and would behave identically when deployed there.
+
+---
+
+### Case A – Pre‑registration of users  
+The operator registers an annotated face image of a guest **before** they interact with the robot. When the guest appears, the system recognizes them immediately without needing any further action.  
+[![Case A](https://img.youtube.com/vi/0R9K5xnG_uo/0.jpg)](https://youtu.be/0R9K5xnG_uo)
+
+---
+
+### Case B – Statistical logging without touching the HRI system  
+During a full day of interactions, the system automatically groups detections into sessions and logs them for analysis. Statistics and session data can be accessed **at any time via the API or the web interface**, without manual intervention.  
+[![Case B](https://img.youtube.com/vi/ZGIwOdBQW1Y/0.jpg)](https://youtu.be/ZGIwOdBQW1Y)
+
+---
+
+### Case D – Safe online editing of the identity database  
+The operator renames and deletes faceprints **while the robot is still running**, with no need to restart nodes or access the internal HRI database.  
+[![Case D](https://img.youtube.com/vi/V8bheVLriKw/0.jpg)](https://youtu.be/V8bheVLriKw)
+
+---
+
+### What about Case C – Remote supervision with live video?
+
+**Case C – "The operator can see what the robot sees remotely" –** is **inherently demonstrated in all three videos above**:  
+In each demo, the web interface displays the real-time video stream exposed by the camera, along with face detection overlays.  
+This confirms that RUMI can be used from any device with network access, without needing physical proximity to the robot.
+
+---
+
+The videos are hosted on YouTube as *unlisted* links and can be accessed from this section.  
+The link to the paper will be added here once it becomes available.
